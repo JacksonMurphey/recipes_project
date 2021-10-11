@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title%}User Dashboard{% endblock %}
+{% block content %}
+
+<h2 class="m-1">Welcome {{user.first_name}}</h2>
+<a href="/dashboard" class="btn btn-primary m-1">Dashboard</a>
+<a href="/user/logout" class="btn btn-warning m-1">Logout</a>
+
+
+<div class="container bg-light m-2 border">
+    <h3>{{recipe.name}}</h3>
+    <h4>Description:</h4>
+    <p>{{recipe.description}}</p>
+    <h4>Under 30 Minutes:</h4>
+    <p>{{recipe.under_thirty}}</p>
+    <h4>Instructions:</h4>
+    <p>{{recipe.instructions}}</p>
+    <h4>Date Made:</h4>
+    <p>{{recipe.date_made}}</p>
+
+</div>
+
+{% endblock %}

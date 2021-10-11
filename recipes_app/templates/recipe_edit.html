@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title%}Create A Recipe{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h2 class="m-1">Add a New Recipe</h2>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/user/logout">Logout</a>
+
+    <div class="row">
+        <div class="col bg-light m-2 border">
+            <form action="/recipe/{{recipe.id}}/update" method="POST" class="m-1">
+                {% with messages = get_flashed_messages(category_filter=['recipe']) %}
+                {% if messages %}
+                <div class="container p-3 mb-2 btn btn-danger">
+                    <ul class="">
+                        {% for message in messages %}
+                        <strong>
+                            <p class="text-lg-left" style="font-size: larger;"> * {{message}}</p>
+                        </strong>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% endwith %}
+                <div class="form-group m-1">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" class="form-control" value="{{recipe.name}}">
+                </div>
+                <div class="form-group m-1">
+                    <label for="description">Description:</label>
+                    <textarea class="form-control" name="description" id="" cols="30"
+                        rows="3">{{recipe.description}}</textarea>
+                </div>
+                <div class="form-group m-1">
+                    <label for="instructions">Instructions:</label>
+                    <textarea class="form-control" name="instructions" id="" cols="30"
+                        rows="3">{{recipe.instructions}}</textarea>
+                </div>
+
+                <div class="col bg-light m-2 border">
+                    <div class="form-group m-1">
+                        <label for="date_made">Date Made On:</label>
+                        <input type="date" name="date_made" id="" value="{{recipe.date_made}}">
+                    </div>
+                    <div class="form-group m-1">
+                        <label for="under_thirty">Under 30 Minutes to make:</label><br>
+
+                        <input type="radio" name="under_thirty" value="Yes">
+                        <span>Yes</span>
+                        <input type="radio" name="under_thirty" value="No">
+                        <span>No</span>
+                    </div>
+                    <div class="form">
+
+                        <input type="hidden" name="user_id" value={{session['user_id']}}>
+                    </div>
+
+                    <input type="submit" class="btn btn-success m-2" name="" value="Update">
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}

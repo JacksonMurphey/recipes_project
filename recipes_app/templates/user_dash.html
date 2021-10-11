@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title%}User Dashboard{% endblock %}
+{% block content %}
+
+<h2 class="m-1">Welcome {{user.first_name}}</h2>
+<a href="/recipe/new" class="btn btn-primary m-1">Create</a>
+<a href="/user/logout" class="btn btn-warning m-1">Logout</a>
+<a href="/user/favorites/{{user.id}}" class="btn btn-success m-1">Your Favorites</a>
+
+<div class="container">
+    <h3>Your Recipes</h3>
+    <table class="table table-hover">
+        <thead>
+            <th>Name</th>
+            <th>30 mins or less</th>
+            <th>ACTIONS</th>
+        </thead>
+        {% if user.recipes %}
+        <tbody>
+            {% for recipe in user.recipes %}
+            <tr>
+                <td>{{recipe.name}}</td>
+                <td>{{recipe.under_thirty}}</td>
+                <td><a href="/recipe/{{recipe.id}}">View Instructions</a> |
+
+                    <a href="/recipe/{{recipe.id}}/edit">Edit</a> |
+                    <a href="/recipe/{{recipe.id}}/destroy">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+        <tbody>
+            <tr>
+                <td>No Data</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<div class="container">
+
+    <div class="container ">
+
+        <table class="table table-hover">
+            <h3>Other User's Recipes</h3>
+            <thead>
+                <th>Name</th>
+                <th>30 mins or less</th>
+                <th>ACTIONS</th>
+            </thead>
+            <tbody>
+                {% for recipe in recipes %}
+                <tr>
+                    <td>{{recipe.name}}</td>
+                    <td>{{recipe.under_thirty}}</td>
+                    <td><a href="/recipe/{{recipe.id}}">View Instructions<a>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
